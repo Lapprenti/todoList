@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
 import Task from './components/Tasks';
 
 const data = [
@@ -26,6 +26,21 @@ const data = [
 
 {/* Todo today section */}
 export default function App() {
+  const [tasks, setTasks] = useState(data)
+  const [newTask, setNewTask] = useState("");
+
+  const addTask = () => {
+    const t = {
+      id: data.length + 1,
+      thumbnail: '',
+      label: newTasktt,
+      isCompleted: false
+    }
+
+    data.push(t);
+    setTasks(data)
+  }
+
   return (
     <View style={styles.container}>
 
@@ -33,12 +48,18 @@ export default function App() {
       <View style={styles.tasksSection}>
         <Text style={styles.titleStyle}> Todo today </Text>
         {
-          data.map(d => {
+          tasks.map(t => {
             return(
-              <Task initialParams={{d}}></Task>
+              <Task key={t.id} initialParams={{t}}></Task>
             )
           })
         }
+        <View>
+          <TextInput value={newTask} style={styles.textInputStyle} placeholder='Add a task' onChangeText={(text) => {
+            setNewTask(text);
+          }}></TextInput>
+          <TouchableOpacity onPress={addTask} style={styles.button}><Text style={{ textAlign: 'center', fontSize: 30 }}>+</Text></TouchableOpacity>
+        </View>
         
       </View>
     </View>
@@ -59,5 +80,21 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     marginBottom: 50
+  },
+  textInputStyle: {
+    backgroundColor: 'white',
+    height: 45,
+    shadowColor: 'rgba(0, 0, 0, 0.15)',
+    borderRadius: 60,
+    width: 240,
+    alignContent: 'center',
+    textAlign: 'center',
+    position: 'absolute',
+  },
+  button: {
+    backgroundColor: 'white',
+    height: 40,
+    borderRadius: 50,
+    width: '10%',
   }
 });

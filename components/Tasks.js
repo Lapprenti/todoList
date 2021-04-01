@@ -2,9 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 const Task = (props) => {
-  const task = props.initialParams.d;
+  const task = props.initialParams.t;
   return (
-    <View style={styles.item} key={task}>
+    <View style={styles.item} >
       <View style={styles.itemLeft}>
         <View style={styles.square}></View>
         <Text style={styles.itemText}>{task.label}</Text>
