@@ -33,7 +33,7 @@ export default function App() {
     const t = {
       id: data.length + 1,
       thumbnail: '',
-      label: newTasktt,
+      label: newTaskt,
       isCompleted: false
     }
 
